@@ -1,10 +1,573 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>在线正则表达式-BeJSON.com</title>
+    <meta name="keywords" content="在线正则表达式" />
+    <meta name="description" content="在线正则表达式">
+    <script src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <style>
+        .list-group-item a {
+            padding-right: 20px;
+        }
+
+        #links a {
+            font-size: 13px;
+        }
+
+        #desc1 {
+            font-size: 13px;
+        }
+
+        .newFeatureTip {
+            width: 13px;
+            height: 13px;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 5px;
+            color: red;
+            right: 10px;
+        }
+
+        .newItem {
+            float: left;
+            color: red;
+            position: absolute;
+            margin-top: 2px;
+            margin-left: 8px;
+        }
+
+        .announce {
+            color: red;
+        }
+
+        .nav > {
+            z-index: 99999999;
+        }
+
+            .nav > li:hover .dropdown-menu {
+                display: block;
+                z-index: 99999999;
+            }
+
+        .navbar {
+            margin-bottom: 4px;
+            min-height: 0px;
+        }
+
+        .navbar-nav > li > a {
+            padding-top: 10px;
+        }
+
+        #nav_div ul > li > span {
+            color: blue;
+        }
+
+        #nav_div ul > li {
+            list-style: none;
+            float: left;
+            margin-left: 10px;
+        }
+
+        #nav_div ul {
+            height: 20px;
+        }
+
+            #nav_div ul:hover {
+                background: gainsboro;
+            }
+
+        nav_div #nav_div ul > li > span {
+            font-family: "微软雅黑";
+            color: blue;
+            width: 72px;
+        }
+
+        #nav_div ul > li > a {
+            color: #666;
+        }
+
+            #nav_div ul > li > a:hover {
+                color: red;
+            }
+
+        .xie {
+            -webkit-transform: rotate(-3deg);
+            -moz-transform: rotate(-3deg);
+            -o-transform: rotate(-3deg);
+        }
+
+        li.hide1 {
+            display: block;
+        }
+
+        * {
+            font-family: "Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+        }
+    </style>
 </head>
 <body>
+    <div class="aw-container-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="aw-content-wrap clearfix">
+                    <div class=" aw-main-content" style="min-height:700px;max-height:2000px">
+                        <nav class="navbar navbar-default">
+                            <div class="container-fluid">
+                                <ul class="nav navbar-nav" style="width: 100%;">
+                                    <li>
+                                        <a href="javascript:;" style="color: red;" onclick="showList()" data-target="#mod" data-toggle="modal" target="_blank">菜单</a>
+                                    </li>
+                                    <li>
+                                        <a href="/">首页</a>
+                                    </li>
+                                    <li class="dropdown hide1">
+                                        <a href="#" class="dropdown-toggle" id="jsontools" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">JSON相关<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="/">格式化校验</a>
+                                            </li>
+                                            <li>
+                                                <a href="/jsonviewernew/" target="_blank" red>JSON视图</a>
+                                            </li>
+                                            <li>
+                                                <a href="/zhuanyi/" red>JSON压缩转义</a>
+                                            </li>
+                                            <li>
+                                                <a href="/json2javapojo/" red>JSON生成Java实体类</a>
+                                            </li>
+                                            <li>
+                                                <a href="/convert/json2csharp/" id="json2csharp">JSON生成C#实体类</a>
+                                            </li>
+                                            <li>
+                                                <a href="/jsoneditoronline/" red>JSON在线编辑器</a>
+                                            </li>
+                                            <li><a href="/color/">JSON着色</a></li>
+                                            <li><a href="/xml2json/" red>XML-JSON互转</a></li>
+                                            <li><a href="/jsontools/json2get/" id="json2get">JSON和GET请求字符串互转</a></li>
+                                            <li><a href="/json/col2json/" id="excel2json">Excel转Json</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown hide1">
+                                        <a href="#" id="encTools" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            编码/加密<span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/enc/base64/">Base64编码、解码</a></li>
+                                            <li><a href="/enc/md5/">MD5加密</a></li>
+                                            <li><a href="/enc/sha/">SHA加密</a></li>
+                                            <li><a href="/enc/escape/">Escape编码</a></li>
+                                            <li><a href="/enc/urlencode/" id="urlEncode">URL编码</a></li>
+                                            <li><a href="/enc/eval_package/">Javascript Eval加密解密</a></li>
+                                            <li><a href="/enc/morse/">摩斯密码加密解密</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown hide1">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">格式化<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/jshtml_format/">Javascript/HTML压缩、格式化</a></li>
+                                            <li><a href="/otherformat/css/">CSS压缩、格式化</a></li>
+                                            <li><a href="/otherformat/xml/">XML压缩、格式化</a></li>
+                                            <li><a href="/otherformat/sql/">SQL压缩、格式化</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown hide1">
+                                        <a href="#" id="httputil" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            网络<span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/httppost/" target="_blank" red>在线模拟发送HTTP请求</a></li>
+                                            <li><a id="http3" href="/httputil/httppost3/">支持返回结果的HTTP请求</a></li>
+                                            <li><a href="/httputil/getip/">获取你的IP</a></li>
+                                            <li><a href="/httputil/queryip/" id="queryip">获取IP信息</a></li>
+                                            <li><a href="/httputil/ip2addr/" id="ip2addr">IP定位周边信息</a></li>
+                                            <li><a href="/httputil/clientinfo/" id="clientinfo">获取您的浏览器信息</a></li>
+                                            <li><a href="/httputil/useragent/" id="useragent">常用USER_AGENT</a></li>
+                                            <li><a href="/convert/subnetmask/" id="subnetmask">TCP/IP子网掩码计算换算</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown hide1">
+                                        <a href="#" id="uitools" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            前端<span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/ui/photoshop/" target="_blank">在线photoshop</a></li>
+                                            <li><a href="http://h5.baidu.com/store" target="_blank" rel="external nofollow" id="h5maker">H5模板在线制作</a></li>
+                                            <li><a href="/ui/borderradius/" id="borderradius">在线生成圆角图片</a></li>
+                                            <li><a href="/ui/icomaker/" id="icomaker">ICO图标在线转换工具</a></li>
+                                            <li><a href="http://runjs.cn/code" target="_blank" rel="external nofollow" id="runjs">RunJS在线编辑器</a></li>
+                                            <li><a href="/ui/ueditor/" id="ueditor">ueditor在线代码编辑器</a></li>
+                                            <li><a href="/ui/getcolor/">在线调色板</a></li>
+                                            <li><a href="/ui/safecolor/" id="safecolor">WEB安全色</a></li>
+                                            <li><a href="/ui/image2base64/" id="img2base64">在线图片转Base64编码</a></li>
+                                            <li><a href="/ui/imageresize/" id="imgResize">在线图片大小缩放</a></li>
+                                            <li><a href="/ui/phonesize/" id="phonesize">iPhone/iPad/Android UI尺寸规范</a></li>
+                                            <li><a href="http://iconfont.cn/collections" target="_blank" rel="external nofollow">阿里巴巴矢量图标库</a></li>
+                                            <li><a href="/othertools/libcdn/" id="libcdn">常用JS资源库</a></li>
+                                            <li><a href="/ui/openweb/" id="openweb">弹出窗口生成器</a></li>
+                                            <li><a href="/ui/texteditor/" id="texteditor">自动排版工具</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown hide1">
+                                        <a href="#" id="convertTools" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            转换<span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/convert/map/" id="mapdw">在线地图经纬度定位换算</a></li>
+                                            <li><a href="/ui/px2em/" id="px2em">px转em,em转px</a></li>
+                                            <li><a href="/ui/image2base64/" id="img2base64">在线图片转Base64编码</a></li>
+                                            <li><a id="unicodechinese" href="/convert/unicode_chinese/">unicode中文互转</a></li>
+                                            <li><a href="/convert/shorturl/" id="shorturl">在线短地址转换</a></li>
+                                            <li><a href="/convert/unix/">Unix时间转换</a></li>
+                                            <li><a href="/convert/jinzhi/">进制转换</a></li>
+                                            <li><a href="/convert/ox2str/">16进制到文本字符串</a></li>
+                                            <li><a href="/convert/uplowercase/" id="uplowercase">字母大小写转换</a></li>
+                                            <li><a href="/convert/rgbhex/" id="rgbhex">RGB颜色和HEX互转</a></li>
+                                            <li><a href="/convert/file2pdf/" id="file2pdf">在线文档转PDF</a></li>
+                                            <li><a href="/convert/qrcode/" id="qrtools">二维码生成与解码</a></li>
+                                            <li><a href="/convert/numtohz/" id="numtohz">数字转中文(人民币)</a></li>
+                                            <li><a href="/convert/filesize/" id="filesizehs">在线文件大小换算</a></li>
+                                            <li><a href="/convert/nativeascii/" id="navasc">NATIVE/ASCII编码互转工具</a></li>
+                                            <li><a href="/othertools/sql2pojo/" id="sql2pojo">数据库转实体类</a></li>
+                                            <li><a href="/convert/htmlubb/" id="htmlubb">Html与UBB代码互相转换工具</a></li>
+                                            <li><a href="/convert/topinying/" id="topinying">汉字转换拼音</a></li>
+                                            <li><a href="/convert/fullhalf/" id="fullhalf">全角半角转换</a></li>
+                                            <li><a href="/convert/j2f/" id="j2f">简繁体火星文互转</a></li>
+                                            <li><a href="/convert/html2markdown/" id="html2markdown">Html转换为MarkDown工具</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown hide1">
+                                        <a href="#" class="dropdown-toggle" id="otherTools" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            其他<span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/othertools/findelement/" id="findbyxpath">寻找图片、链接或xpath寻找元素</a></li>
+                                            <li><a href="/othertools/finddif/">文字对比找不同处</a></li>
+                                            <li><a href="/othertools/regex/">正则表达式</a></li>
+                                            <li><a href="/othertools/sqlAppend/">SQL追加或去除双引号</a></li>
+                                            <li><a href="/othertools/removeDuplicate/">去除重复字符串</a></li>
+                                            <li><a href="/othertools/sortwords/" id="sortWords">在线根据首字母排序</a></li>
+                                            <li><a href="/chargeservice/ocr/">在线文字识别</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" id="jsonapi" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            接口API<span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
 
+
+                                            <li><a href="/knownjson/webInterface/" id="findbyxpath">免费JSON接口</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown hide1">
+                                        <a href="#" class="dropdown-toggle" id="docs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            文档<span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a id="apliayapi" href="http://wiki.open.qq.com/wiki/%E9%A6%96%E9%A1%B5" target="_blank" rel="external nofollow">腾讯开发平台</a></li>
+                                            <li><a id="wxapi" href="http://mp.weixin.qq.com/wiki/home/index.html" target="_blank" rel="external nofollow">微信公众平台开发文档</a></li>
+                                            <li><a id="wxapi" href="http://mp.weixin.qq.com/wiki/11/74ad127cc054f6b80759c40f77ec03db.html" target="_blank" rel="external nofollow">微信JSSDK开发文档</a></li>
+                                            <li><a id="wxapi" href="https://pay.weixin.qq.com/wiki/doc/api/index.html" target="_blank" rel="external nofollow">微信支付开发文档</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a id="tbapi" href="http://open.taobao.com/api/api_list.htm?spm=a219a.7386789.1.27.Lf4YRD" target="_blank" rel="external nofollow">淘宝开发文档</a></li>
+                                            <li><a id="apliayapi" href="https://open.alipay.com/platform/document.htm" target="_blank" rel="external nofollow">支付宝开发文档</a></li>
+                                            <li role="separator" class="divider"></li>
+
+                                            <li><a href="/doc/AndroidManifest/" id="androidManifest">Android权限大全</a></li>
+                                            <li><a id="jqapi" href="http://www.jq22.com/chm/jquery1.8.3.html" target="_blank" rel="external nofollow">jQuery文档</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="/knownjson/aboutjson/">什么是JSON</a></li>
+                                            <li><a href="/knownjson/demo/">举个栗子</a></li>
+                                            <li><a href="/knownjson/webInterface/">JSON API免费接口</a></li>
+                                            <li><a href="/knownjson/regexJiaocheng/">正则表达式30分钟入门教程</a></li>
+                                            <li><a href="/knownjson/httpstate/">HTTP状态码查询</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown hide1">
+                                        <a href="#" class="dropdown-toggle" id="testtools" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">平台工具<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a rel="external nofollow" target="_blank" href="http://mp.weixin.qq.com/debug">微信公众平台调试工具</a></li>
+                                            <li><a id="coupon" rel="external nofollow" target="_blank" href="http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=cardsign">微信卡券JSAPI签名校验工具</a></li>
+                                            <li><a id="wxsign" rel="external nofollow" target="_blank" href="http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign">微信 JS 接口签名校验工具</a></li>
+                                            <li><a rel="external nofollow" target="_blank" href="http://qy.weixin.qq.com/debug">微信企业号调试工具</a></li>
+                                            <li><a rel="external nofollow" target="_blank" href="http://connect.qq.com/sdk/webtools/">QQ互联API调试工具</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a rel="external nofollow" target="_blank" href="http://t.cn/R4617Pf">淘宝oauth2.0测试工具</a></li>
+                                            <li><a rel="external nofollow" target="_blank" href="http://t.cn/R461ZZu">淘宝API测试工具</a></li>
+                                            <li><a rel="external nofollow" target="_blank" href="http://t.cn/R461Zm2">淘宝错误码查询工具</a></li>
+                                            <li><a rel="external nofollow" target="_blank" href="http://t.cn/R461wa7">淘宝商品属性工具</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a rel="external nofollow" target="_blank" href="http://sandbox.alipaydev.com/home/apiTestTools.htm?method=alipay.security.risk.detect">支付宝API工具</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a rel="external nofollow" target="_blank" href="http://open.weibo.com/tools/console">新浪微博API工具</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="http://www.jq22.com/" target="_blank">jQuery插件库</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" id="moret" data-toggle="dropdown" style="color: red;" role="button" aria-haspopup="true" aria-expanded="false">
+                                            更多<span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="/soft/">常用软件下载</a>
+                                            </li>
+                                            <li>
+                                                <a href="/robot/" id="td" style="color: green;">我是泰迪</a>
+                                            </li>
+                                            <li>
+                                                <a href="/other/blogs/">Blogs</a>
+                                            </li>
+                                            <li>
+                                                <a href="/knownjson/msg/">留言</a>
+                                            </li>
+                                            <li>
+                                                <a href="/other/ads/">广告招租</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <script>
+                            var showaban = true;
+                            var storageKey = "newtools20160527";
+                            if (window.localStorage.getItem(storageKey) == null) {
+                                $("#docs").after('<span class="newFeatureTip">●</span>');
+
+                                $("#androidManifest").before('<span class="newItem">●</span>');
+                                document.getElementById("androidManifest").onmouseover = function () {
+                                    window.localStorage.setItem(storageKey, "has");
+                                    $(".newFeatureTip").text('');
+                                }
+
+                            }
+
+                        </script>
+                        <div style="clear:both"></div>
+                        <style>
+                            .a2016 {
+                                color: white;
+                                font-family: "Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+                                text-align: center;
+                                background: red;
+                                border-radius: 2px;
+                            }
+                        </style>
+
+
+                        <style>
+                            #mainContent textarea {
+                                width: 100%;
+                                height: 150px;
+                            }
+
+                            #mainContent textarea, #mainContent input[type='text'] {
+                                border: 1px solid #ccc;
+                            }
+                        </style>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h4 class="media-heading">在线正则表达式</h4>
+                                        <div id="desc1">
+                                            在线正则表达式
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body" id="mainContent">
+
+                                <div class="span8">
+                                    <div class="operateTB">
+                                        <form class="well form-inline">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id="basic-addon1">正则表达式</span>
+                                                <input type="text" style="width: 400px;" class="form-control" id="textPattern" placeholder="在此输入正则表达式">
+                                                <div class="input-group-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        常用正则表达式<span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-right" id="regexUl">
+                                                        <li><a href="javascript:;" title="<[^>]*>">匹配所有的Html标签</a></li>
+                                                        <li><a href="javascript:;" title="<script[^>]*?>.*?</script>">去除所有脚本，中间部分也删除</a></li>
+                                                        <li><a href="javascript:;" title="<img[^>]*>">去除图片的正则</a></li>
+                                                        <li><a href="javascript:;" title="<(?!br).*?>">去除所有标签，只剩br</a></li>
+                                                        <li><a href="javascript:;" title="<table[^>]*?>.*?</table>">去除table里面的所有内容</a></li>
+                                                        <li><a href="javascript:;" title="<(?!img|br|p|/p).*?>">去除所有标签，只剩img,br,p</a></li>
+                                                        <li>
+                                                            <a href="javascript:;" title="[\u4e00-\u9fa5]">匹配中文字符</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="[^\x00-\xff]">匹配双字节字符(包括汉字在内)</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="\n\s*\r">匹配空白行</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="[\w!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[\w!#$%&amp;'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?">匹配Email地址</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="[a-zA-z]+://[^\s]*">匹配网址URL</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="\d{3}-\d{8}|\d{4}-\{7,8}">匹配国内电话号码</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="[1-9][0-9]{4,}">匹配腾讯QQ号</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="[1-9]\d{5}(?!\d)">匹配中国邮政编码</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$">匹配18位身份证号</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))">匹配(年-月-日)格式日期</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="^[1-9]\d*$">匹配正整数</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="^-[1-9]\d*$">匹配负整数</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="^-?[1-9]\d*$">匹配整数</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="^[1-9]\d*|0$">匹配非负整数（正整数 + 0）</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="^-[1-9]\d*|0$">匹配非正整数（负整数 + 0）</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$">匹配正浮点数</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" title="^-[1-9]\d*\.\d*|-0\.\d*[1-9]\d*$">匹配负浮点数</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <input type="checkbox" value="global" checked="checked" id="optionGlobal" name="optionGlobl">全局搜索
+                                            <input type="checkbox" value="ignoreCase" id="optionIgnoreCase" name="optionIgnoreCase">忽略大小写
+                                            <a onclick="return onMatch();" class="btn btn-primary btn-sm"><i class="icon-chevron-down icon-white"></i>匹配</a>
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id="basic-addon1">替换文本</span>
+                                                <input type="text" style="width: 400px;" class="form-control" id="textReplace" placeholder="在此输入正则表达式">
+                                            </div>
+                                            <a onclick="return onReplace();" class="btn btn-primary btn-sm"><i class="icon-chevron-down icon-white"></i>替换</a>
+                                            <a onclick="return reset();" class="btn btn-primary btn-sm"><i class="icon-chevron-down icon-white"></i>重置</a>
+                                        </form>
+                                    </div>
+
+                                </div>
+                                <div class="topBar">
+                                    <textarea id="textSour" placeholder="在此输入待匹配文本"></textarea>
+                                </div>
+                                <div class="bottomBar">
+                                    <div class="title">匹配结果：</div>
+                                    <textarea readonly="readonly" id="textMatchResult"></textarea>
+                                </div>
+                                <div class="bottomBar">
+                                    <div class="title">替换结果：</div>
+                                    <textarea readonly="readonly" id="textReplaceResult"></textarea>
+                                </div>
+                            </div>
+                            <input type="hidden" id="encode" value="1" />
+                            <div class="panel-footer"></div>
+                        </div>
+                        <script language="javascript">
+                            $(document).ready(function () {
+                                $("#regexUl  a").click(function () {
+                                    $("#textPattern").val($(this).attr("title"));
+                                    onMatch();
+                                });
+                            });
+
+                            function setVisible(idElement, visible) {
+                                var obj = document.getElementById(idElement);
+                                obj.style.visibility = visible ? "visible" : "hidden";
+                            }
+                            function isValidFields() {
+                                var textSour = document.getElementById("textSour");
+                                if (null == textSour.value || textSour.value.length < 1) {
+                                    textSour.focus();
+                                    alert("请输入待匹配文本");
+                                    return false;
+                                }
+                                var textPattern = document.getElementById("textPattern");
+                                if (null == textPattern.value || textPattern.value.length < 1) {
+                                    textPattern.focus();
+                                    alert("请输入正则表达式");
+                                    return false;
+                                }
+                                return true;
+                            }
+                            function buildRegex() {
+                                var op = "";
+                                if (document.getElementById("optionGlobal").checked) op = "g";
+                                if (document.getElementById("optionIgnoreCase").checked) op = op + "i";
+                                return new RegExp(document.getElementById("textPattern").value, op);
+                            }
+                            function onMatch() {
+                                if (!isValidFields())
+                                    return false;
+                                document.getElementById("textMatchResult").value = "";
+                                document.getElementById("textReplaceResult").value = "";
+                                var regex = buildRegex();
+                                var result = document.getElementById("textSour").value.match(regex);
+                                if (null == result || 0 == result.length) {
+                                    document.getElementById("textMatchResult").value = "（没有匹配）";
+                                    return false;
+                                }
+                                if (document.getElementById("optionGlobal").checked) {
+                                    var strResult = "共找到 " + result.length + " 处匹配：\r\n";
+                                    for (var i = 0; i < result.length; ++i) strResult = strResult + result[i] + "\r\n";
+                                    document.getElementById("textMatchResult").value = strResult;
+                                }
+                                else {
+                                    document.getElementById("textMatchResult").value = "匹配位置：" + regex.lastIndex + "\r\n匹配结果：" + result[0];
+                                }
+                                document.getElementById("textReplaceResult").value = str.replace(regex, document.getElementById("textReplace").value);
+                                return true;
+                            }
+                            function onReplace() {
+                                var str = document.getElementById("textSour").value;
+                                var regex = buildRegex();
+                                document.getElementById("textReplaceResult").value = str.replace(regex, document.getElementById("textReplace").value);
+                            }
+                            function reset() {
+                                $("#textSour").val("");
+                                $("#textPattern").val("");
+                                $("#textReplace").val("");
+                                $("#textMatchResult").val("");
+                                $("#textReplaceResult").val("");
+                            }
+                        </script>
+                        <script type="text/javascript">
+                            function Empty() {
+                                document.getElementById('searchText').value = '';
+                                document.getElementById('inputText').value = '';
+                                document.getElementById('searchText').select();
+                            }
+
+                            function GetFocus() {
+                                document.getElementById('content').focus();
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="http://bejson.qiniudn.com/bejsoncommon.js"></script>
 </body>
 </html>
